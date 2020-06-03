@@ -66,7 +66,7 @@
 					for (var locationList of locations) {
 						for (var location of locationList) {
 							var geoData = dmaData.features.filter(function(data) { 
-								return data.properties.dma_code == location 
+								return data.properties.dma == location 
 							});
 							if (geoData.length == 1) {
 								map.data.addGeoJson(geoData[0]);
