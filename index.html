@@ -62,6 +62,7 @@
 				
 				readTextFile("dmaData.json", function(text){
 					var dmaData = JSON.parse(text);
+					console.log(locations);
 					for (var locationList in locations) {
 						console.log('locationList: ' + locationList);
 						for (var location in locationList) {
