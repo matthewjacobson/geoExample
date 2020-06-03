@@ -35,7 +35,11 @@
 			document.getElementsByTagName('head')[0].appendChild(JSElement);
 			
 			function initMap() {
-				console.log("map loaded");
+				map = new google.maps.Map(document.getElementById('map'), {
+					zoom: 5,
+					center: {lng: 0, lat: 0},
+					mapTypeId: 'terrain'
+				});
 			}
 			
 			var locations = [
