@@ -8,11 +8,23 @@
 	<body>
 
 		<script>
+			
+			var locations = [
+				[767, 839, 100], // cell 1
+				[65, 9, 89],     // cell 2
+				[543, 558, 804]  // cell 3
+			];
+			
+			var dmaData;
 			fetch('https://raw.githubusercontent.com/simzou/nielsen-dma/master/nielsen-mkt-map.json')
 			    .then(res => res.json())
 			    .then((out) => {
 				console.log('Output: ', out);
+				dmaData = out;
 			}).catch(err => console.error(err));
+			
+			console.log(damData);
+			
 		</script>
 		
 	</body>
