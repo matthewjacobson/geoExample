@@ -54,6 +54,8 @@
 					.then((out) => {dmaData = out;})
 					.catch(err => console.error(err));
 				
+				console.log(dmaData);
+				
 				for (var locationList in locations) {
 					for (var location in locationList) {
 						console.log('location: ' + location);
