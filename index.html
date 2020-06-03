@@ -48,7 +48,7 @@
 			
 			function initMap() {
 				
-				map = new google.maps.Map(document.getElementById('map'), {
+				var map = new google.maps.Map(document.getElementById('map'), {
 					zoom: 4,
 					center: {lng: -98.5556199, lat: 39.8097343},
 					mapTypeId: 'terrain'
@@ -67,28 +67,23 @@
 							var geoData = dmaData.features.filter(function(data) { 
 								return data.properties.dma_code == location 
 							});
-							console.log('geoData: ' + JSON.stringify(geoData));			      
+							if (geoData.length == 1) {
+								addShape(map, geoData);
+							} else if (geoData.length == 0) {
+								console.log('no dmas found for ' + location);
+							} else {
+								console.log('multiple dmas found for ' + location);
+							}
+							
 						}
 					}
 				});
 
-// 				fetch('https://raw.githubusercontent.com/simzou/nielsen-dma/master/nielsen-mkt-map.json')
-// 					.then(res => res.json())
-// 					.then((dmaData) => {
-// 						console.log(dmaData);
-// 					})
-// 					.catch(err => console.error(err));
-				
-// 				for (var locationList in locations) {
-// 					console.log('locationList: ' + locationList);
-// 					for (var location in locationList) {
-// 						console.log('location: ' + location);
-// 						var geoData = dmaData.features.filter(function(data) { 
-// 							return data.properties.dma_code == location 
-// 						});
-// 						console.log('geoData: ' + geoData);			      
-// 					}
-// 				}
+			}
+			
+			function addShape(map, geoData) {
+				console.log('map: ' + map);
+				console.log('geoData: ' + JSON.stringify(geoData));
 			}
 			
 		</script>
