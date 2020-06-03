@@ -62,7 +62,17 @@
 				
 				readTextFile("dmaData.json", function(text){
 					var dmaData = JSON.parse(text);
-					console.log(dmaData);
+					for (var locationList in locations) {
+						console.log('locationList: ' + locationList);
+						for (var location in locationList) {
+							console.log('location: ' + location);
+							var geoData = dmaData.features.filter(function(data) { 
+								return data.properties.dma_code == location 
+							});
+							console.log('geoData: ' + geoData);			      
+						}
+					}
+			}
 				});
 
 // 				fetch('https://raw.githubusercontent.com/simzou/nielsen-dma/master/nielsen-mkt-map.json')
