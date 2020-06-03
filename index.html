@@ -68,7 +68,7 @@
 								return data.properties.dma_code == location 
 							});
 							if (geoData.length == 1) {
-								map.data.loadGeoJson(geoData[0]);
+								map.data.addGeoJson(geoData[0]);
 // 								addShape(map, geoData[0]);
 							} else if (geoData.length == 0) {
 								console.log('no dmas found for ' + location);
