@@ -79,16 +79,24 @@
 						}
 					}
 				});
-
-			}
-			
-			function addShape(map, geoData) {
-				for (var shape of geoData.geometry.coordinates) {
-					var shapeCoords = [];
-					for (var coords of shape) {
-						
+				
+				map.data.setStyle(function(feature) {
+					var dma = feature.properties.dma;
+					var colors = ['red', 'blue', 'green'];
+					for (var i = 0; i < locations.length; i++) {
+						if (locations[i].contains(dma)) {
+							return {
+								fillColor: colors[i];
+								strokeWeight: 1
+							}
+						}
 					}
-				}
+					return {
+						fillColor: 'gray';
+						strokeWeight: 1
+					}
+				});
+
 			}
 			
 		</script>
