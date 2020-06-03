@@ -56,15 +56,16 @@
 				
 				console.log(dmaData);
 				
-				for (var locationList in locations) {
-					for (var location in locationList) {
-						console.log('location: ' + location);
-						var geoData = dmaData.features.filter(function(data) { 
-							return data.properties.dma_code == location 
-						});
-						console.log('geoData: ' + geoData);			      
-					}
-				}
+// 				for (var locationList in locations) {
+// 					console.log('locationList: ' + locationList);
+// 					for (var location in locationList) {
+// 						console.log('location: ' + location);
+// 						var geoData = dmaData.features.filter(function(data) { 
+// 							return data.properties.dma_code == location 
+// 						});
+// 						console.log('geoData: ' + geoData);			      
+// 					}
+// 				}
 			}
 			
 		</script>
