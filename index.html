@@ -48,10 +48,9 @@
 					[543, 558, 804]  // cell 3
 				];
 
-				var dmaData;
 				fetch('https://raw.githubusercontent.com/simzou/nielsen-dma/master/nielsen-mkt-map.json')
 					.then(res => res.json())
-					.then((out) => {
+					.then((dmaData) => {
 						console.log(dmaData);
 					})
 					.catch(err => console.error(err));
