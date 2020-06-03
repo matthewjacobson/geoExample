@@ -84,7 +84,7 @@
 					var dma = feature.getProperty('dma');
 					var colors = ['red', 'blue', 'green'];
 					for (var i = 0; i < locations.length; i++) {
-						if (locations[i].contains(dma)) {
+						if (locations[i].includes(dma)) {
 							return {
 								fillColor: colors[i],
 								strokeWeight: 1
