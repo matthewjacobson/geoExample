@@ -35,28 +35,35 @@
 			document.getElementsByTagName('head')[0].appendChild(JSElement);
 			
 			function initMap() {
+				
 				map = new google.maps.Map(document.getElementById('map'), {
 					zoom: 6,
 					center: {lng: -98.5556199, lat: 39.8097343},
 					mapTypeId: 'terrain'
 				});
+			
+				var locations = [
+					[767, 839, 100], // cell 1
+					[65, 9, 89],     // cell 2
+					[543, 558, 804]  // cell 3
+				];
+
+				var dmaData;
+				fetch('https://raw.githubusercontent.com/simzou/nielsen-dma/master/nielsen-mkt-map.json')
+					.then(res => res.json())
+					.then((out) => {dmaData = out;})
+					.catch(err => console.error(err));
+				
+				for (var locationList in locations) {
+					for (var location in locationList) {
+						console.log('location: ' + location);
+						var geoData = dmaData.features.filter(function(data) { 
+							return data.properties.dma_code == location 
+						});
+						console.log('geoData: ' + geoData);			      
+					}
+				}
 			}
-			
-			var locations = [
-				[767, 839, 100], // cell 1
-				[65, 9, 89],     // cell 2
-				[543, 558, 804]  // cell 3
-			];
-			
-			var dmaData;
-			fetch('https://raw.githubusercontent.com/simzou/nielsen-dma/master/nielsen-mkt-map.json')
-			    .then(res => res.json())
-			    .then((out) => {
-				console.log('Output: ', out);
-				dmaData = out;
-			}).catch(err => console.error(err));
-			
-			console.log(dmaData);
 			
 		</script>
 		
