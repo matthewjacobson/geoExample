@@ -119,8 +119,9 @@
 // 									map.data.loadGeoJson('http://polygons.openstreetmap.fr/get_geojson.py?id=' + mapping[location] + '&params=0');
 									fetch('http://polygons.openstreetmap.fr/get_geojson.py?id=' + mapping[location] + '&params=0')
 										.then(res => {
+											console.log('res: ' + res);
 											var jsonString = '{\"type\":\"FeatureCollection\",\"features\":[' + JSON.stringify(res) + ']}';
-											console.log(jsonString);
+											console.log('jsonString: ' + jsonString);
 											map.data.addGeoJson(JSON.parse(jsonString));
 										})
 										.catch(err => console.error(err));
