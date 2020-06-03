@@ -34,6 +34,18 @@
 			JSElement.onload = initMap;
 			document.getElementsByTagName('head')[0].appendChild(JSElement);
 			
+			function readTextFile(file, callback) {
+				var rawFile = new XMLHttpRequest();
+				rawFile.overrideMimeType("application/json");
+				rawFile.open("GET", file, true);
+				rawFile.onreadystatechange = function() {
+					if (rawFile.readyState === 4 && rawFile.status == "200") {
+						callback(rawFile.responseText);
+					}
+				}
+				rawFile.send(null);
+			}
+			
 			function initMap() {
 				
 				map = new google.maps.Map(document.getElementById('map'), {
@@ -47,13 +59,18 @@
 					[65, 9, 89],     // cell 2
 					[543, 558, 804]  // cell 3
 				];
+				
+				readTextFile("dmaData.json", function(text){
+					var dmaData = JSON.parse(text);
+					console.log(dmaData);
+				});
 
-				fetch('https://raw.githubusercontent.com/simzou/nielsen-dma/master/nielsen-mkt-map.json')
-					.then(res => res.json())
-					.then((dmaData) => {
-						console.log(dmaData);
-					})
-					.catch(err => console.error(err));
+// 				fetch('https://raw.githubusercontent.com/simzou/nielsen-dma/master/nielsen-mkt-map.json')
+// 					.then(res => res.json())
+// 					.then((dmaData) => {
+// 						console.log(dmaData);
+// 					})
+// 					.catch(err => console.error(err));
 				
 // 				for (var locationList in locations) {
 // 					console.log('locationList: ' + locationList);
