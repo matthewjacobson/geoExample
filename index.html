@@ -51,10 +51,10 @@
 				var dmaData;
 				fetch('https://raw.githubusercontent.com/simzou/nielsen-dma/master/nielsen-mkt-map.json')
 					.then(res => res.json())
-					.then((out) => {dmaData = out;})
+					.then((out) => {
+						console.log(dmaData);
+					})
 					.catch(err => console.error(err));
-				
-				console.log(dmaData);
 				
 // 				for (var locationList in locations) {
 // 					console.log('locationList: ' + locationList);
