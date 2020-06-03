@@ -118,8 +118,8 @@
 								if (location in mapping) {
 // 									map.data.loadGeoJson('http://polygons.openstreetmap.fr/get_geojson.py?id=' + mapping[location] + '&params=0');
 									fetch('http://polygons.openstreetmap.fr/get_geojson.py?id=' + mapping[location] + '&params=0')
-										.then(res => res.json())
-										.then((out) => { map.data.addGeoJson('{\"type\":\"FeatureCollection\",\"features\":[' + out + ']}'); })
+										.then(res => ('{\"type\":\"FeatureCollection\",\"features\":[' + res + ']}').json())
+										.then((out) => { map.data.addGeoJson(out); })
 										.catch(err => console.error(err));
 								} else {
 									console.log('location ' + location + ' not found.');
