@@ -62,10 +62,9 @@
 				
 				readTextFile("dmaData.json", function(text){
 					var dmaData = JSON.parse(text);
-					console.log(locations);
-					for (var locationList in locations) {
+					for (var locationList of locations) {
 						console.log('locationList: ' + locationList);
-						for (var location in locationList) {
+						for (var location of locationList) {
 							console.log('location: ' + location);
 							var geoData = dmaData.features.filter(function(data) { 
 								return data.properties.dma_code == location 
