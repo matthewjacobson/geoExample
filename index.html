@@ -68,7 +68,8 @@
 								return data.properties.dma_code == location 
 							});
 							if (geoData.length == 1) {
-								addShape(map, geoData);
+								map.data.loadGeoJson(geoData[0]);
+// 								addShape(map, geoData[0]);
 							} else if (geoData.length == 0) {
 								console.log('no dmas found for ' + location);
 							} else {
@@ -82,8 +83,12 @@
 			}
 			
 			function addShape(map, geoData) {
-				console.log('map: ' + map);
-				console.log('geoData: ' + JSON.stringify(geoData));
+				for (var shape of geoData.geometry.coordinates) {
+					var shapeCoords = [];
+					for (var coords of shape) {
+						
+					}
+				}
 			}
 			
 		</script>
