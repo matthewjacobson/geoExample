@@ -62,6 +62,24 @@
 				
 				readTextFile("dmaData.json", function(text){
 					var dmaData = JSON.parse(text);
+					
+					var index = 0;
+					var cell1 = [];
+					var cell2 = [];
+					var cell3 = [];
+					for (var dma in dmaData.features) {
+						if (index == 0) {
+							cell1.push(dma.properties.dma);
+						} else if (index == 1) {
+							cell2.push(dma.properties.dma);
+						} else {
+							cell3.push(dma.properties.dma);
+						}
+					}
+					console.log(cell1);
+					console.log(cell2);
+					console.log(cell3);
+					
 					for (var locationList of locations) {
 						for (var location of locationList) {
 							var geoData = dmaData.features.filter(function(data) { 
