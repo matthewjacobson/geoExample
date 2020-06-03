@@ -116,7 +116,11 @@
 						for (var locationList of locations) {
 							for (var location of locationList) {
 								if (location in mapping) {
-									map.data.loadGeoJson('http://polygons.openstreetmap.fr/get_geojson.py?id=' + mapping[location] + '&params=0');
+// 									map.data.loadGeoJson('http://polygons.openstreetmap.fr/get_geojson.py?id=' + mapping[location] + '&params=0');
+									fetch('http://polygons.openstreetmap.fr/get_geojson.py?id=' + mapping[location] + '&params=0')
+										.then(res => res.json())
+										.then((out) => { map.data.addGeoJson('{\"type\":\"FeatureCollection\",\"features\":[' + out + ']}'); })
+										.catch(err => console.error(err));
 								} else {
 									console.log('location ' + location + ' not found.');
 								}
