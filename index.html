@@ -120,7 +120,7 @@
 									fetch('http://polygons.openstreetmap.fr/get_geojson.py?id=' + mapping[location] + '&params=0')
 										.then(res => {
 											var jsonString = '{\"type\":\"FeatureCollection\",\"features\":[' + res + ']}';
-											map.data.addGeoJson(res.json());
+											map.data.addGeoJson(JSON.parse(res));
 										})
 										.catch(err => console.error(err));
 								} else {
