@@ -8,12 +8,11 @@
 	<body>
 
 		<script>
-			<script>
-				fetch('https://raw.githubusercontent.com/simzou/nielsen-dma/master/nielsen-mkt-map.json')
-				    .then(res => res.json())
-				    .then((out) => {
-					console.log('Output: ', out);
-				}).catch(err => console.error(err));
+			fetch('https://raw.githubusercontent.com/simzou/nielsen-dma/master/nielsen-mkt-map.json')
+			    .then(res => res.json())
+			    .then((out) => {
+				console.log('Output: ', out);
+			}).catch(err => console.error(err));
 		</script>
 		
 	</body>
