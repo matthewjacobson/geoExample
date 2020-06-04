@@ -25,6 +25,7 @@
 
 		<div id="map"></div>
 		
+		<script src="https://raw.githubusercontent.com/maxogden/GeoJSON-to-Google-Maps/master/GeoJSON.js"></script>
 		<script>
 			
 			var urlParams = new URLSearchParams(window.location.search);
@@ -119,12 +120,14 @@
 							for (var location of locationList) {
 								if (location in mapping) {
 									readTextFile("usCountyGeoJsonData/" + mapping[location] + ".txt", function(geoJsonText){
-										var geoJsonData = JSON.parse(geoJsonText);
-										geoJsonData.type = 'Feature';
-										geoJsonData.geometry = geoJsonData.geometries[0];
-										delete geoJsonData.geometries;
-										geoJsonData.properties = {"osmid": mapping[location]};
-										map.data.addGeoJson(geoJsonData);
+										var test = new GeoJSON(JSON.parse(geoJsonText));
+										console.log(JSON.stringify(test));
+// 										var geoJsonData = JSON.parse(geoJsonText);
+// 										geoJsonData.type = 'Feature';
+// 										geoJsonData.geometry = geoJsonData.geometries[0];
+// 										delete geoJsonData.geometries;
+// 										geoJsonData.properties = {"osmid": mapping[location]};
+// 										map.data.addGeoJson(geoJsonData);
 									});
 								} else {
 									console.log('location ' + location + ' not found.');
