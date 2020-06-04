@@ -121,11 +121,11 @@
 									readTextFile("usCountyGeoJsonData/" + mapping[location] + ".txt", function(geoJsonText){
 										var geoJsonData = JSON.parse(geoJsonText);
 										console.log(JSON.stringify(geoJsonData));
-// 										geoJsonData.type = 'Feature';
+										geoJsonData.type = 'Feature';
 // 										geoJsonData.geometry = geoJsonData.geometries;
 // 										delete geoJsonData.geometries;
 // 										geoJsonData.properties = {"osmid": mapping[location]};
-// 										map.data.loadGeoJson(geoJsonData);
+										map.data.loadGeoJson(geoJsonData);
 									});
 // 									map.data.loadGeoJson('http://polygons.openstreetmap.fr/get_geojson.py?id=' + mapping[location] + '&params=0');
 								} else {
