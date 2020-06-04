@@ -121,13 +121,15 @@
 									readTextFile("usCountyGeoJsonData/" + mapping[location] + ".txt", function(geoJsonText) {
 										var geoJsonData = JSON.parse(geoJsonText);
 										
-										for (var i = 0; i < geoJsonData.geometries.length; i++) {
-											var newGeoJsonData = geoJsonData;
-											newGeoJsonData.type = 'Feature';
-											newGeoJsonData.geometry = geoJsonData.geometries[i];
-											delete newGeoJsonData.geometries;
-											newGeoJsonData.properties = {"osmid": mapping[location], "geometryCount": i};
-// 											map.data.addGeoJson(newGeoJsonData);
+										if (geoJsonData.geometries) {
+											for (var i = 0; i < geoJsonData.geometries.length; i++) {
+												var newGeoJsonData = geoJsonData;
+												newGeoJsonData.type = 'Feature';
+												newGeoJsonData.geometry = geoJsonData.geometries[i];
+												delete newGeoJsonData.geometries;
+												newGeoJsonData.properties = {"osmid": mapping[location], "geometryCount": i};
+	// 											map.data.addGeoJson(newGeoJsonData);
+											}
 										}
 										
 // 										geoJsonData.type = 'Feature';
