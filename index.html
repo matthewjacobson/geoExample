@@ -120,9 +120,9 @@
 								if (location in mapping) {
 									readTextFile("usCountyGeoJsonData/" + mapping[location] + ".txt", function(geoJsonText){
 										var geoJsonData = JSON.parse(geoJsonText);
-// 										geoJsonData.type = 'Feature';
-// 										geoJsonData.geometry = geoJsonData.geometries[0];
-// 										delete geoJsonData.geometries;
+										geoJsonData.type = 'Feature';
+										geoJsonData.geometry = geoJsonData.geometries[0];
+										delete geoJsonData.geometries;
 										geoJsonData.properties = {"osmid": mapping[location]};
 										map.data.addGeoJson(geoJsonData);
 									});
