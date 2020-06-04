@@ -118,7 +118,7 @@
 						for (var locationList of locations) {
 							for (var location of locationList) {
 								if (location in mapping) {
-									readTextFile(mapping[location] + ".txt", function(text){
+									readTextFile("usCountyGeoJsonData/" + mapping[location] + ".txt", function(text){
 										console.log(text);
 									});
 // // 									map.data.loadGeoJson('http://polygons.openstreetmap.fr/get_geojson.py?id=' + mapping[location] + '&params=0');
