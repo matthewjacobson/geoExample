@@ -116,17 +116,17 @@
 						for (var locationList of locations) {
 							for (var location of locationList) {
 								if (location in mapping) {
-									var geoJsonData = readTextFile("usCountyGeoJsonData/" + mapping[location] + ".txt", function(geoJsonText) {
-										return JSON.parse(geoJsonText);
+									readTextFile("usCountyGeoJsonData/" + mapping[location] + ".txt", function(geoJsonText) {
+										var geoJsonData = JSON.parse(geoJsonText);
+										for (var i = 0; i < geoJsonData.geometries.length; i++) {
+											var newGeoJsonData = JSON.parse(JSON.stringify(geoJsonData));
+											newGeoJsonData.type = 'Feature';
+											newGeoJsonData.geometry = geoJsonData.geometries[i];
+											delete newGeoJsonData.geometries;
+											newGeoJsonData.properties = {"locationId": location, "geometryCount": i};
+											map.data.addGeoJson(newGeoJsonData);
+										}
 									});
-									for (var i = 0; i < geoJsonData.geometries.length; i++) {
-										var newGeoJsonData = JSON.parse(JSON.stringify(geoJsonData));
-										newGeoJsonData.type = 'Feature';
-										newGeoJsonData.geometry = geoJsonData.geometries[i];
-										delete newGeoJsonData.geometries;
-										newGeoJsonData.properties = {"locationId": location, "geometryCount": i};
-										map.data.addGeoJson(newGeoJsonData);
-									}
 								} else {
 									console.log('location ' + location + ' not found.');
 								}
