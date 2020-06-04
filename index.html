@@ -120,15 +120,13 @@
 								if (location in mapping) {
 									readTextFile("usCountyGeoJsonData/" + mapping[location] + ".txt", function(geoJsonText) {
 										var geoJsonData = JSON.parse(geoJsonText);
-										if (geoJsonData.geometries) {
-											for (var i = 0; i < geoJsonData.geometries.length; i++) {
-												var newGeoJsonData = JSON.parse(JSON.stringify(geoJsonData));
-												newGeoJsonData.type = 'Feature';
-												newGeoJsonData.geometry = geoJsonData.geometries[i];
-												delete newGeoJsonData.geometries;
-												newGeoJsonData.properties = {"osmid": mapping[location], "geometryCount": i};
-												map.data.addGeoJson(newGeoJsonData);
-											}
+										for (var i = 0; i < geoJsonData.geometries.length; i++) {
+											var newGeoJsonData = JSON.parse(JSON.stringify(geoJsonData));
+											newGeoJsonData.type = 'Feature';
+											newGeoJsonData.geometry = geoJsonData.geometries[i];
+											delete newGeoJsonData.geometries;
+											newGeoJsonData.properties = {"locationId": location, "geometryCount": i};
+											map.data.addGeoJson(newGeoJsonData);
 										}
 									});
 								} else {
@@ -139,10 +137,10 @@
 					});
 					
 					map.data.setStyle(function(feature) {
-						var dma = feature.getProperty('osmid');
+						var locationId = feature.getProperty('locationId');
 						var colors = ['red', 'blue', 'green'];
 						for (var i = 0; i < locations.length; i++) {
-							if (locations[i].includes(dma)) {
+							if (locations[i].includes(locationId)) {
 								return {
 									fillColor: colors[i],
 									strokeWeight: 1
