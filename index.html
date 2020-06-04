@@ -118,10 +118,12 @@
 						for (var locationList of locations) {
 							for (var location of locationList) {
 								if (location in mapping) {
-									readTextFile("usCountyGeoJsonData/" + mapping[location] + ".txt", function(geoJsonText){
+									readTextFile("usCountyGeoJsonData/" + JSON.stringify(mapping[location]) + ".txt", function(geoJsonText){
 										var geoJsonData = JSON.parse(geoJsonText);
-										geoJsonData['type'] = 'Feature';
-										geoJsonData['properties'] = {"osmid": mapping[location]};
+										geoJsonData.type = 'Feature';
+										geoJsonData.geometry = geoJsonData.geometries;
+										delete geoJsonData.geometries;
+										geoJsonData.properties = {"osmid": mapping[location]};
 										map.data.loadGeoJson(geoJsonData);
 									});
 // 									map.data.loadGeoJson('http://polygons.openstreetmap.fr/get_geojson.py?id=' + mapping[location] + '&params=0');
