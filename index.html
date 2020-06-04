@@ -120,14 +120,12 @@
 								if (location in mapping) {
 									readTextFile("usCountyGeoJsonData/" + mapping[location] + ".txt", function(geoJsonText){
 										var geoJsonData = JSON.parse(geoJsonText);
-										geoJsonData.type = 'Feature';
-										geoJsonData.geometry = geoJsonData.geometries[0];
-										delete geoJsonData.geometries;
+// 										geoJsonData.type = 'Feature';
+// 										geoJsonData.geometry = geoJsonData.geometries[0];
+// 										delete geoJsonData.geometries;
 										geoJsonData.properties = {"osmid": mapping[location]};
-										console.log(JSON.stringify(geoJsonData));
 										map.data.addGeoJson(geoJsonData);
 									});
-// 									map.data.loadGeoJson('http://polygons.openstreetmap.fr/get_geojson.py?id=' + mapping[location] + '&params=0');
 								} else {
 									console.log('location ' + location + ' not found.');
 								}
