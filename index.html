@@ -118,18 +118,13 @@
 						for (var locationList of locations) {
 							for (var location of locationList) {
 								if (location in mapping) {
-									readTextFile("usCountyGeoJsonData/" + mapping[location] + ".txt", function(text){
-										console.log(text);
+									readTextFile("usCountyGeoJsonData/" + mapping[location] + ".txt", function(geoJsonText){
+										var geoJsonData = JSON.parse(geoJsonText);
+										geoJsonData['type'] = 'Feature';
+										geoJsonData['properties'] = {"osmid": mapping[location]};
+										map.data.loadGeoJson(geoJsonData);
 									});
-// // 									map.data.loadGeoJson('http://polygons.openstreetmap.fr/get_geojson.py?id=' + mapping[location] + '&params=0');
-// 									fetch('http://polygons.openstreetmap.fr/get_geojson.py?id=' + mapping[location] + '&params=0')
-// 										.then(res => {
-// 											console.log('res: ' + JSON.stringify(res));
-// 											var jsonString = '{\"type\":\"FeatureCollection\",\"features\":[' + JSON.stringify(res) + ']}';
-// 											console.log('jsonString: ' + jsonString);
-// 											map.data.addGeoJson(JSON.parse(jsonString));
-// 										})
-// 										.catch(err => console.error(err));
+// 									map.data.loadGeoJson('http://polygons.openstreetmap.fr/get_geojson.py?id=' + mapping[location] + '&params=0');
 								} else {
 									console.log('location ' + location + ' not found.');
 								}
