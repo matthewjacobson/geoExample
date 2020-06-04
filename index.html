@@ -118,9 +118,8 @@
 						for (var locationList of locations) {
 							for (var location of locationList) {
 								if (location in mapping) {
-									var geoJsonData;
-									readTextFile("usCountyGeoJsonData/" + mapping[location] + ".txt", function(geoJsonText) {
-										geoJsonData = JSON.parse(geoJsonText);
+									var geoJsonData = readTextFile("usCountyGeoJsonData/" + mapping[location] + ".txt", function(geoJsonText) {
+										return JSON.parse(geoJsonText);
 									});
 									for (var i = 0; i < geoJsonData.geometries.length; i++) {
 										var newGeoJsonData = JSON.parse(JSON.stringify(geoJsonData));
