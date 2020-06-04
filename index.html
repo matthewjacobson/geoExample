@@ -122,12 +122,11 @@
 										var geoJsonData = JSON.parse(geoJsonText);
 										
 										for (var i = 0; i < geoJsonData.geometries.length; i++) {
-											console.log(mapping[location].toString() + ', ' + geoJsonData.geometries.length.toString() + ', ' + i.toString());
-// 											var newGeoJsonData = geoJsonData;
-// 											newGeoJsonData.type = 'Feature';
-// 											newGeoJsonData.geometry = geoJsonData.geometries[i];
-// 											delete newGeoJsonData.geometries;
-// 											newGeoJsonData.properties = {"osmid": mapping[location], "geometryCount": i};
+											var newGeoJsonData = geoJsonData;
+											newGeoJsonData.type = 'Feature';
+											newGeoJsonData.geometry = geoJsonData.geometries[i];
+											delete newGeoJsonData.geometries;
+											newGeoJsonData.properties = {"osmid": mapping[location], "geometryCount": i};
 // 											map.data.addGeoJson(newGeoJsonData);
 										}
 										
