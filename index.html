@@ -120,26 +120,38 @@
 								if (location in mapping) {
 									readTextFile("usCountyGeoJsonData/" + mapping[location] + ".txt", function(geoJsonText) {
 										var geoJsonData = JSON.parse(geoJsonText);
-										
-										for (var i = 0; i < geoJsonData.geometries.length; i++) {
-											var newGeoJsonData = JSON.parse(JSON.stringify(geoJsonData));
-											newGeoJsonData.type = 'Feature';
-											newGeoJsonData.geometry = geoJsonData.geometries[i];
-											delete newGeoJsonData.geometries;
-											newGeoJsonData.properties = {"osmid": mapping[location], "geometryCount": i};
-											map.data.addGeoJson(newGeoJsonData);
+										if (geoJsonData.geometries) {
+											for (var i = 0; i < geoJsonData.geometries.length; i++) {
+												var newGeoJsonData = JSON.parse(JSON.stringify(geoJsonData));
+												newGeoJsonData.type = 'Feature';
+												newGeoJsonData.geometry = geoJsonData.geometries[i];
+												delete newGeoJsonData.geometries;
+												newGeoJsonData.properties = {"osmid": mapping[location], "geometryCount": i};
+												map.data.addGeoJson(newGeoJsonData);
+											}
 										}
-										
-// 										geoJsonData.type = 'Feature';
-// 										geoJsonData.geometry = geoJsonData.geometries[0];
-// 										delete geoJsonData.geometries;
-// 										geoJsonData.properties = {"osmid": mapping[location]};
-// 										map.data.addGeoJson(geoJsonData);
 									});
 								} else {
 									console.log('location ' + location + ' not found.');
 								}
 							}
+						}
+					});
+					
+					map.data.setStyle(function(feature) {
+						var dma = feature.getProperty('osmid');
+						var colors = ['red', 'blue', 'green'];
+						for (var i = 0; i < locations.length; i++) {
+							if (locations[i].includes(dma)) {
+								return {
+									fillColor: colors[i],
+									strokeWeight: 1
+								}
+							}
+						}
+						return {
+							fillColor: 'gray',
+							strokeWeight: 1
 						}
 					});
 					
