@@ -82,33 +82,6 @@
 
 				addColorToShapes(map);
 				
-				// if (locationType == 'COUNTY') {
-					
-				// 	readTextFile("countyLocationOsmMapping.json", function(text) {
-				// 		var mapping = JSON.parse(text);
-				// 		for (var locationList of locations) {
-				// 			for (var location of locationList) {
-				// 				if (location in mapping) {
-				// 					readTextFile("usCountyGeoJsonData/" + mapping[location] + ".txt", function(geoJsonText) {
-				// 						var geoJsonData = JSON.parse(geoJsonText);
-				// 						for (var i = 0; i < geoJsonData.geometries.length; i++) {
-				// 							var newGeoJsonData = JSON.parse(JSON.stringify(geoJsonData));
-				// 							newGeoJsonData.type = 'Feature';
-				// 							newGeoJsonData.geometry = geoJsonData.geometries[i];
-				// 							delete newGeoJsonData.geometries;
-				// 							newGeoJsonData.properties = {"locationId": location, "geometryCount": i};
-				// 							map.data.addGeoJson(newGeoJsonData);
-				// 						}
-				// 					});
-				// 				} else {
-				// 					console.log('location ' + location + ' not found.');
-				// 				}
-				// 			}
-				// 		}
-				// 	});
-					
-				// }
-				
 			}
 
 			function createDMAShapes(dmaData, locations, map) {
@@ -118,7 +91,7 @@
 						var geoData = dmaData.features.filter(function(data) { 
 							return data.properties.dma == location 
 						});
-						geoData.properties.cellNum = cellNum;
+						geoData[0].properties.cellNum = cellNum;
 						if (geoData.length == 1) {
 							map.data.addGeoJson(geoData[0]);
 						} else if (geoData.length == 0) {
