@@ -133,7 +133,7 @@
 				map.data.setStyle(function(feature) {
 					console.log(feature);
 					var cellNum = feature.getProperty('cellNum');
-					var colors = ['red', 'blue', 'green'];
+					var colors = ['red', 'blue', 'yellow'];
 					if (cellNum < colors.length) {
 						return {
 							fillColor: colors[cellNum],
