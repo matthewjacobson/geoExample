@@ -131,7 +131,7 @@
 			function createCACityShapes(mapping, locations, map) {
 				for (var cellNum = 0; cellNum < locations.length; cellNum++) {
 					for (var location of locations[cellNum]) {
-						if (location in mapping) {
+						if (location in mapping && mapping[location] != 0) {
 							readTextFile("caCityGeoJsonData/" + mapping[location] + ".txt", function(geoJsonText, opt) {
 								formatGeoJson(JSON.parse(geoJsonText), opt, map);
 							}, cellNum);
