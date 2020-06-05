@@ -108,8 +108,9 @@
 				for (var cellNum = 0; cellNum < locations.length; cellNum++) {
 					for (var location of locations[cellNum]) {
 						if (location in mapping) {
+							var copyCellNum = cellNum;
 							readTextFile("usCountyGeoJsonData/" + mapping[location] + ".txt", function(geoJsonText) {
-								console.log(cellNum);
+								console.log(copyCellNum);
 								formatGeoJson(JSON.parse(geoJsonText), cellNum, map);
 							});
 						} else {
