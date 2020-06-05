@@ -124,14 +124,15 @@
 					newGeoJsonData.type = 'Feature';
 					newGeoJsonData.geometry = geoJsonData.geometries[i];
 					delete newGeoJsonData.geometries;
-					newGeoJsonData.properties = {"cellNum": cellNum, "geometryCount": i};
+					// newGeoJsonData.properties = {"cellNum": cellNum, "geometryCount": i};
+					newGeoJsonData.properties = {"geometryCount": i};
+					newGeoJsonData.properties.cellNum = cellNum;
 					map.data.addGeoJson(newGeoJsonData);
 				}
 			}
 
 			function addColorToShapes(map) {
 				map.data.setStyle(function(feature) {
-					console.log(feature);
 					var cellNum = feature.getProperty('cellNum');
 					var colors = ['red', 'blue', 'yellow'];
 					if (cellNum < colors.length) {
