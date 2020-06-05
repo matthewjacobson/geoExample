@@ -111,7 +111,7 @@
 							var copyCellNum = cellNum;
 							readTextFile("usCountyGeoJsonData/" + mapping[location] + ".txt", function(geoJsonText) {
 								console.log(copyCellNum);
-								formatGeoJson(JSON.parse(geoJsonText), cellNum, map);
+								formatGeoJson(JSON.parse(geoJsonText), copyCellNum, map);
 							});
 						} else {
 							console.log('location ' + location + ' not found.');
@@ -126,9 +126,9 @@
 					newGeoJsonData.type = 'Feature';
 					newGeoJsonData.geometry = geoJsonData.geometries[i];
 					delete newGeoJsonData.geometries;
-					// newGeoJsonData.properties = {"cellNum": cellNum, "geometryCount": i};
-					newGeoJsonData.properties = {"geometryCount": i};
-					newGeoJsonData.properties.cellNum = cellNum;
+					newGeoJsonData.properties = {"cellNum": cellNum, "geometryCount": i};
+					// newGeoJsonData.properties = {"geometryCount": i};
+					// newGeoJsonData.properties.cellNum = cellNum;
 					map.data.addGeoJson(newGeoJsonData);
 				}
 			}
