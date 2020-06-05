@@ -109,6 +109,7 @@
 					for (var location of locations[cellNum]) {
 						if (location in mapping) {
 							readTextFile("usCountyGeoJsonData/" + mapping[location] + ".txt", function(geoJsonText) {
+								console.log(cellNum);
 								formatGeoJson(JSON.parse(geoJsonText), cellNum, map);
 							});
 						} else {
