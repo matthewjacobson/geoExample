@@ -131,7 +131,7 @@
 			function addColorToShapes(map) {
 				map.data.setStyle(function(feature) {
 					var cellNum = feature.getProperty('cellNum');
-					var colors = ['red', 'blue', 'purple'];
+					var colors = ['red', 'blue', 'green'];
 					if (cellNum < colors.length) {
 						return {
 							fillColor: colors[cellNum],
