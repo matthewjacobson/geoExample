@@ -326,7 +326,7 @@
 					newGeoJsonData.geometry = geoJsonData.geometries[i];
 					delete newGeoJsonData.geometries;
 					newGeoJsonData.properties = {"cellNum": cellNum, "geometryCount": i};
-					newGeoJsonData..addListener('click', showInfo);
+					newGeoJsonData.addListener('click', showInfo);
 					map.data.addGeoJson(newGeoJsonData);
 				}
 			}
