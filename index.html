@@ -319,7 +319,7 @@
 					for (var location of locations[cellNum]) {
 						if (location in mapping && mapping[location] != 0) {
 							readTextFile("caCityGeoJsonData/" + mapping[location] + ".txt", function(geoJsonText, opt) {
-								formatGeoJson(JSON.parse(geoJsonText), opt.cellNum, map, opt.location);
+								formatGeoJson(JSON.parse(geoJsonText), opt.cellNum, map, opt.id);
 							}, {"cellNum": cellNum, "id": location});
 						} else {
 							console.log('location ' + location + ' not found.');
