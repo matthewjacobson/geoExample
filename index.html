@@ -272,8 +272,8 @@
 				
 				map.data.addListener('mouseover', function(event) {
 					console.log(event);
-// 					infoWindow.setPosition(event.latLng);
-// 					infoWindow.open(map);
+					infoWindow.setPosition(event.latLng);
+					infoWindow.open(map);
 // 					document.getElementById('info-box').textContent = event.feature.getProperty('letter');
 				});
 				
@@ -354,12 +354,6 @@
 					}
 				});
 			}
-			
-			function showInfo(event) {
-				console.log(event);
-				infoWindow.setPosition(event.latLng);
-				infoWindow.open(map);
-      			}
 			
 		</script>
 		
