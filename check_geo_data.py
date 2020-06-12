@@ -19,5 +19,5 @@ for x in mapping_json:
 			ouput_geojson_file.write(json.dumps(r.json()))
 		except json.decoder.JSONDecodeError:
 			ouput_geojson_file.write('None')
-			print('no geojson data found for osmid ' + osmid + ': ' + url)
+			print('no geojson data found for osmid ' + osmid + ': ' + 'http://polygons.openstreetmap.fr/get_geojson.py?id=' + osmid + '&params=0')
 		ouput_geojson_file.close()
