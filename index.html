@@ -270,7 +270,7 @@
 
 				addColorToShapes(map);
 				
-				map.data.addListener('mouseover', function(event) {
+				map.data.addListener('click', function(event) {
 					console.log(event);
 					infoWindow.setPosition(event.latLng);
 					infoWindow.open(map);
