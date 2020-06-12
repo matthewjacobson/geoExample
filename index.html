@@ -270,6 +270,13 @@
 
 				addColorToShapes(map);
 				
+				map.data.addListener('mouseover', function(event) {
+					console.log(event);
+// 					infoWindow.setPosition(event.latLng);
+// 					infoWindow.open(map);
+// 					document.getElementById('info-box').textContent = event.feature.getProperty('letter');
+				});
+				
 			}
 
 			function createDMAShapes(dmaData, locations, map) {
@@ -326,7 +333,6 @@
 					newGeoJsonData.geometry = geoJsonData.geometries[i];
 					delete newGeoJsonData.geometries;
 					newGeoJsonData.properties = {"cellNum": cellNum, "geometryCount": i};
-					newGeoJsonData.addListener('click', showInfo);
 					map.data.addGeoJson(newGeoJsonData);
 				}
 			}
