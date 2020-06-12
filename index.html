@@ -216,6 +216,8 @@
 					]
 				});
 				
+				infoWindow = new google.maps.InfoWindow;
+				
 // 				var locationType = 'DMA';
 // 				var locations = [
 // 					[662, 790, 634, 635, 537, 821, 502, 757, 514, 767, 519, 584, 602, 598, 546, 535, 623, 751, 606, 565, 802, 513, 670, 798, 755, 545, 636, 533, 618, 527, 561, 603, 702, 643, 839, 722, 529, 669, 813, 528, 687, 628, 570, 501, 633, 534, 804, 675, 508, 552, 560, 556, 611, 576, 641, 855, 657, 725, 619, 609, 539, 605, 789, 709, 625, 705, 627, 550, 771],	// cell 1
@@ -324,6 +326,7 @@
 					newGeoJsonData.geometry = geoJsonData.geometries[i];
 					delete newGeoJsonData.geometries;
 					newGeoJsonData.properties = {"cellNum": cellNum, "geometryCount": i};
+					newGeoJsonData..addListener('click', showInfo);
 					map.data.addGeoJson(newGeoJsonData);
 				}
 			}
@@ -345,6 +348,12 @@
 					}
 				});
 			}
+			
+			function showInfo(event) {
+				console.log(event);
+				infoWindow.setPosition(event.latLng);
+				infoWindow.open(map);
+      			}
 			
 		</script>
 		
