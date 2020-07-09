@@ -291,7 +291,7 @@
 					for (var location of locations[cellNum]) {
 						if (location in mapping) {
 							readTextFile("usDmaGeoJsonData/" + mapping[location] + ".txt", function(geoJsonText, opt) {
-								geoJsonData = JSON.parse(geoJsonText), opt, map);
+								geoJsonData = JSON.parse(geoJsonText);
 								geoJsonData.properties.cellNum = cellNum;
 								map.data.addGeoJson(geoJsonData);
 							}, cellNum);
