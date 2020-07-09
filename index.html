@@ -271,30 +271,14 @@
 			}
 
 			function createDMAShapes(mapping, locations, map) {
-// 				for (var cellNum = 0; cellNum < locations.length; cellNum++) {
-// 					for (var location of locations[cellNum]) {
-// 						var geoData = dmaData.features.filter(function(data) { 
-// 							return data.properties.id == location 
-// 						});
-// 						geoData[0].properties.cellNum = cellNum;
-// 						if (geoData.length == 1) {
-// 							map.data.addGeoJson(geoData[0]);
-// 						} else if (geoData.length == 0) {
-// 							console.log('no dmas found for ' + location);
-// 						} else {
-// 							console.log('multiple dmas found for ' + location);
-// 						}
-
-// 					}
-// 				}
 				for (var cellNum = 0; cellNum < locations.length; cellNum++) {
 					for (var location of locations[cellNum]) {
 						if (location in mapping) {
 							readTextFile("usDmaGeoJsonData/" + mapping[location] + ".txt", function(geoJsonText, opt) {
 								geoJsonData = JSON.parse(geoJsonText);
-								geoJsonData.properties.cellNum = cellNum;
+								geoJsonData.properties = {"cellNum": cellNum, "id": location};
 								map.data.addGeoJson(geoJsonData);
-							}, cellNum);
+							}, {"cellNum": cellNum, "id": location});
 						} else {
 							console.log('location ' + location + ' not found.');
 						}
@@ -307,8 +291,8 @@
 					for (var location of locations[cellNum]) {
 						if (location in mapping) {
 							readTextFile("usCountyGeoJsonData/" + mapping[location] + ".txt", function(geoJsonText, opt) {
-								formatGeoJson(JSON.parse(geoJsonText), opt, map);
-							}, cellNum);
+								formatGeoJson(JSON.parse(geoJsonText), opt.cellNum, map, opt.id);
+							}, {"cellNum": cellNum, "id": location});
 						} else {
 							console.log('location ' + location + ' not found.');
 						}
