@@ -31,7 +31,7 @@
 			var env = urlParams.get('env');
 			var exptid = urlParams.get('exptid');
 			var JSElement = document.createElement('script');
-			JSElement.src = "https://maps.googleapis.com/maps/api/js?key=" + urlParams.get('token');// + "&callback=initMap";
+			JSElement.src = "https://maps.googleapis.com/maps/api/js?key=" + urlParams.get('token');
 			JSElement.defer = true;
 			JSElement.onload = initMap;
 			document.getElementsByTagName('head')[0].appendChild(JSElement);
@@ -250,19 +250,19 @@
 				}
 				
 				if (locationType == 'US_DMA') {
-					readTextFile(clientPrefix + "usDmaLocationOsmMapping.json", function(text) {
+					readTextFile('locationMapping/' + clientPrefix + "usDmaLocationOsmMapping.json", function(text) {
 						createDMAShapes(JSON.parse(text), locations, map);
 					});
 				} else if (locationType == 'US_CBSA') {
-					readTextFile(clientPrefix + "usCbsaLocationOsmMapping.json", function(text) {
+					readTextFile('locationMapping/' + clientPrefix + "usCbsaLocationOsmMapping.json", function(text) {
 						createUsCbsaShapes(JSON.parse(text), locations, map);
 					});
 				} else if (locationType == 'US_COUNTY') {
-					readTextFile(clientPrefix + "usCountyLocationOsmMapping.json", function(text) {
+					readTextFile('locationMapping/' + clientPrefix + "usCountyLocationOsmMapping.json", function(text) {
 						createUSCountyShapes(JSON.parse(text), locations, map);
 					});
 				} else if (locationType == 'CA_CITY') {
-					readTextFile(clientPrefix + "caCityLocationOsmMapping.json", function(text) {
+					readTextFile('locationMapping/' + clientPrefix + "caCityLocationOsmMapping.json", function(text) {
 						createCACityShapes(JSON.parse(text), locations, map);
 					});
 				} else {
@@ -285,7 +285,7 @@
 				for (var cellNum = 0; cellNum < locations.length; cellNum++) {
 					for (var location of locations[cellNum]) {
 						if (location in mapping) {
-							readTextFile("usDmaGeoJsonData/" + mapping[location] + ".txt", function(geoJsonText, opt) {
+							readTextFile("geoJsonData/usDmaGeoJsonData/" + mapping[location] + ".txt", function(geoJsonText, opt) {
 								geoJsonData = JSON.parse(geoJsonText);
 								geoJsonData.properties = {"cellNum": opt.cellNum, "id": opt.location};
 								map.data.addGeoJson(geoJsonData);
@@ -301,7 +301,7 @@
 				for (var cellNum = 0; cellNum < locations.length; cellNum++) {
 					for (var location of locations[cellNum]) {
 						if (location in mapping) {
-							readTextFile("usCbsaGeoJsonData/" + mapping[location] + ".txt", function(geoJsonText, opt) {
+							readTextFile("geoJsonData/usCbsaGeoJsonData/" + mapping[location] + ".txt", function(geoJsonText, opt) {
 								geoJsonData = JSON.parse(geoJsonText);
 								geoJsonData.properties = {"cellNum": opt.cellNum, "id": opt.location};
 								map.data.addGeoJson(geoJsonData);
@@ -317,7 +317,7 @@
 				for (var cellNum = 0; cellNum < locations.length; cellNum++) {
 					for (var location of locations[cellNum]) {
 						if (location in mapping) {
-							readTextFile("usCountyGeoJsonData/" + mapping[location] + ".txt", function(geoJsonText, opt) {
+							readTextFile("geoJsonData/usCountyGeoJsonData/" + mapping[location] + ".txt", function(geoJsonText, opt) {
 								formatGeoJson(JSON.parse(geoJsonText), opt.cellNum, map, opt.id);
 							}, {"cellNum": cellNum, "id": location});
 						} else {
@@ -331,7 +331,7 @@
 				for (var cellNum = 0; cellNum < locations.length; cellNum++) {
 					for (var location of locations[cellNum]) {
 						if (location in mapping && mapping[location] != 0) {
-							readTextFile("caCityGeoJsonData/" + mapping[location] + ".txt", function(geoJsonText, opt) {
+							readTextFile("geoJsonData/caCityGeoJsonData/" + mapping[location] + ".txt", function(geoJsonText, opt) {
 								formatGeoJson(JSON.parse(geoJsonText), opt.cellNum, map, opt.id);
 							}, {"cellNum": cellNum, "id": location});
 						} else {
