@@ -227,6 +227,13 @@
 							[37860,37826,37975,37915,37999,37937,38017,38027,37941,37872,37877,37887,37858,37838,37884,37868,37890,37829,37927,37969,37913,37950,38009,37928,37919,37856,37849,38018,37852,37853],
 							[37850,37848,37891,37881,37963,38003,37865,37926,37923,37896,38016,37842,37922,38028,37974,37914,37862,37932,37901,37968,38000,37837,37964,37965,37944,37956,38029,37905,37839,37855]
 						];
+					} else if (exptid == 67) {
+						var locationType = 'US_CBSA';
+						var locations = [
+							[433,685,741,603,665,369,689,355,112,377,97,352,166,662,260,276,738,834,362,375,478,199,722,751,374,113,34,806,686,752,364,594,781,57,343,426,930,182,598,593,790,542,76,274,286,3,446,490,602,162,212,293,697,60,753,617,692,750,619,585,69,537,493,794,158,763,265,64,818,306,837,844,643,477,496,812,696,230,96,23,348,559,935,302,912,853,226,310,708,335,928,451,186,723,415,365,900,470,816,459,220,292,825,133,936,473,468,398,482,54],
+							[555,416,601,543,163,934,207,566,295,299,406,146,672,143,409,560,673,148,464,693,246,591,799,218,405,924,761,589,791,558,773,613,910,666,382,89,540,762,273,718,381,443,394,434,121,563,307,128,621,408,48,139,47,736,716,59,11,125,2,445,160,800,357,911,164,622,39,777,663,810,15,861,378,453,399,628,883,510,251,179,852,571,856,123,605,263,329,32,318,393,20,500,80,269,444,742,154,231,250,244,486,94,721,754,170,440,49,290,156,634],
+							[116,811,392,140,775,704,713,730,454,430,25,141,644,108,82,604,569,573,501,87,859,118,869,652,70,461,700,519,505,159,155,766,483,105,95,814,402,456,439,629,739,282,131,805,552,854,886,620,462,567,757,565,706,228,838,860,442,626,507,198,337,850,898,319,106,564,7,707,74,888,183,10,749,517,342,465,173,765,92,90,110,187,241,819,768,323,350,783,467,217,345,650,317,792,746,400,917,687,740,455,249,813,358,324,370,884,191,184,702,410]
+						];
 					}
 				} else if (env == 'p2') {
 					var clientPrefix = 'ctc_';
@@ -246,8 +253,12 @@
 					readTextFile(clientPrefix + "usDmaLocationOsmMapping.json", function(text) {
 						createDMAShapes(JSON.parse(text), locations, map);
 					});
+				} else if (locationType == 'US_CBSA') {
+					readTextFile(clientPrefix + "usCbsaLocationOsmMapping.json", function(text) {
+						createUSCBSAShapes(JSON.parse(text), locations, map);
+					});
 				} else if (locationType == 'US_COUNTY') {
-					readTextFile(clientPrefix + "countyLocationOsmMapping.json", function(text) {
+					readTextFile(clientPrefix + "usCountyLocationOsmMapping.json", function(text) {
 						createUSCountyShapes(JSON.parse(text), locations, map);
 					});
 				} else if (locationType == 'CA_CITY') {
@@ -275,6 +286,22 @@
 					for (var location of locations[cellNum]) {
 						if (location in mapping) {
 							readTextFile("usDmaGeoJsonData/" + mapping[location] + ".txt", function(geoJsonText, opt) {
+								geoJsonData = JSON.parse(geoJsonText);
+								geoJsonData.properties = {"cellNum": opt.cellNum, "id": opt.location};
+								map.data.addGeoJson(geoJsonData);
+							}, {"cellNum": cellNum, "id": location});
+						} else {
+							console.log('location ' + location + ' not found.');
+						}
+					}
+				}
+			}
+
+			function createCBSAShapes(mapping, locations, map) {
+				for (var cellNum = 0; cellNum < locations.length; cellNum++) {
+					for (var location of locations[cellNum]) {
+						if (location in mapping) {
+							readTextFile("usCbsaGeoJsonData/" + mapping[location] + ".txt", function(geoJsonText, opt) {
 								geoJsonData = JSON.parse(geoJsonText);
 								geoJsonData.properties = {"cellNum": opt.cellNum, "id": opt.location};
 								map.data.addGeoJson(geoJsonData);
