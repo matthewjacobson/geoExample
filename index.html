@@ -276,7 +276,7 @@
 						if (location in mapping) {
 							readTextFile("usDmaGeoJsonData/" + mapping[location] + ".txt", function(geoJsonText, opt) {
 								geoJsonData = JSON.parse(geoJsonText);
-								geoJsonData.properties = {"cellNum": cellNum, "id": location};
+								geoJsonData.properties = {"cellNum": opt.cellNum, "id": opt.location};
 								map.data.addGeoJson(geoJsonData);
 							}, {"cellNum": cellNum, "id": location});
 						} else {
