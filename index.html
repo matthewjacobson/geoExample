@@ -255,7 +255,7 @@
 					});
 				} else if (locationType == 'US_CBSA') {
 					readTextFile(clientPrefix + "usCbsaLocationOsmMapping.json", function(text) {
-						createUSCBSAShapes(JSON.parse(text), locations, map);
+						createUsCbsaShapes(JSON.parse(text), locations, map);
 					});
 				} else if (locationType == 'US_COUNTY') {
 					readTextFile(clientPrefix + "usCountyLocationOsmMapping.json", function(text) {
@@ -297,7 +297,7 @@
 				}
 			}
 
-			function createCBSAShapes(mapping, locations, map) {
+			function createUsCbsaShapes(mapping, locations, map) {
 				for (var cellNum = 0; cellNum < locations.length; cellNum++) {
 					for (var location of locations[cellNum]) {
 						if (location in mapping) {
